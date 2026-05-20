@@ -1,0 +1,381 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F3721AA4DF2B2FEC1DFA76A /* TempoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920350F52C3A47598B9112E0 /* TempoConfig.swift */; };
+		73DC8D9F87DFE0EE0D70B7DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C627ADBD548BE775273B7 /* ContentView.swift */; };
+		7867F5E7E2FA7ECDB7B596B9 /* TempoEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C6173965FE784286805FB /* TempoEngine.swift */; };
+		82BBEAD91CC2CC9537DD452D /* GearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2F05621D075514446AA6CD /* GearButton.swift */; };
+		93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */; };
+		9EB8C8CC36B3975890825543 /* ElevenLabsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */; };
+		BE8F18693BAEC9227EB10B0E /* hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01C3577C6BA0902C113AC04B /* hit.mp3 */; };
+		DC0FF5F54E7BD1B16F7FE534 /* BeatIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */; };
+		E6F738779A5CAF84C38238D4 /* AudioCuePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */; };
+		F14A44DC00AEF2955E1E338F /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA6461435B8B19BA351D1FEC /* back.mp3 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01C3577C6BA0902C113AC04B /* hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hit.mp3; sourceTree = "<group>"; };
+		39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatIndicatorView.swift; sourceTree = "<group>"; };
+		43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCuePlayer.swift; sourceTree = "<group>"; };
+		44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsService.swift; sourceTree = "<group>"; };
+		5A0C6173965FE784286805FB /* TempoEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoEngine.swift; sourceTree = "<group>"; };
+		8A4C627ADBD548BE775273B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		920350F52C3A47598B9112E0 /* TempoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoConfig.swift; sourceTree = "<group>"; };
+		B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GolfTempoTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA6461435B8B19BA351D1FEC /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
+		BB2F05621D075514446AA6CD /* GearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearButton.swift; sourceTree = "<group>"; };
+		C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfTempoTrainerApp.swift; sourceTree = "<group>"; };
+		DDA123FF120A07F6E0A84E68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		007E2498FCD690A7075F0633 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BA6461435B8B19BA351D1FEC /* back.mp3 */,
+				01C3577C6BA0902C113AC04B /* hit.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		486EEC01FDA4AC6DB1072D09 = {
+			isa = PBXGroup;
+			children = (
+				C6C403A39BD84F9461F48C76 /* GolfTempoTrainer */,
+				532D26618CBA964647233702 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49311593589CF73E7E2DEF40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */,
+				8A4C627ADBD548BE775273B7 /* ContentView.swift */,
+				BB2F05621D075514446AA6CD /* GearButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		532D26618CBA964647233702 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60FD078E4EC05BE11DB17C20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				007E2498FCD690A7075F0633 /* Audio */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		615C62033302FC86CC6DE360 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */,
+				5A0C6173965FE784286805FB /* TempoEngine.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		6502267BCCA0C3FD75637470 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BFF45ACEDF2799E20EBD06B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				920350F52C3A47598B9112E0 /* TempoConfig.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C6C403A39BD84F9461F48C76 /* GolfTempoTrainer */ = {
+			isa = PBXGroup;
+			children = (
+				C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */,
+				DDA123FF120A07F6E0A84E68 /* Info.plist */,
+				615C62033302FC86CC6DE360 /* Audio */,
+				BFF45ACEDF2799E20EBD06B0 /* Models */,
+				60FD078E4EC05BE11DB17C20 /* Resources */,
+				6502267BCCA0C3FD75637470 /* Services */,
+				49311593589CF73E7E2DEF40 /* Views */,
+			);
+			path = GolfTempoTrainer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB16DE6BC24115CDEA06FC22 /* GolfTempoTrainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFC641717205DED9EBCF5160 /* Build configuration list for PBXNativeTarget "GolfTempoTrainer" */;
+			buildPhases = (
+				C344B41AC61914EA82E6A766 /* Sources */,
+				6E7684B4AC52331841D6BD7D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GolfTempoTrainer;
+			packageProductDependencies = (
+			);
+			productName = GolfTempoTrainer;
+			productReference = B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10F7FB59B4D56F21FF23FD50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 6D6E16A9AFC44E88B95DEA4F /* Build configuration list for PBXProject "GolfTempoTrainer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 486EEC01FDA4AC6DB1072D09;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 532D26618CBA964647233702 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB16DE6BC24115CDEA06FC22 /* GolfTempoTrainer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E7684B4AC52331841D6BD7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14A44DC00AEF2955E1E338F /* back.mp3 in Resources */,
+				BE8F18693BAEC9227EB10B0E /* hit.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C344B41AC61914EA82E6A766 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6F738779A5CAF84C38238D4 /* AudioCuePlayer.swift in Sources */,
+				DC0FF5F54E7BD1B16F7FE534 /* BeatIndicatorView.swift in Sources */,
+				73DC8D9F87DFE0EE0D70B7DA /* ContentView.swift in Sources */,
+				9EB8C8CC36B3975890825543 /* ElevenLabsService.swift in Sources */,
+				82BBEAD91CC2CC9537DD452D /* GearButton.swift in Sources */,
+				93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */,
+				1F3721AA4DF2B2FEC1DFA76A /* TempoConfig.swift in Sources */,
+				7867F5E7E2FA7ECDB7B596B9 /* TempoEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		57A3CAF31F526720827988AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = GolfTempoTrainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		796A32CE660EAC3B8B69BD9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p55t.GolfTempoTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		993EBB41373E49E633EFF796 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.p55t.GolfTempoTrainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		CEE30DA85D4600CFB8F2E9D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = GolfTempoTrainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D6E16A9AFC44E88B95DEA4F /* Build configuration list for PBXProject "GolfTempoTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				993EBB41373E49E633EFF796 /* Debug */,
+				796A32CE660EAC3B8B69BD9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FFC641717205DED9EBCF5160 /* Build configuration list for PBXNativeTarget "GolfTempoTrainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE30DA85D4600CFB8F2E9D0 /* Debug */,
+				57A3CAF31F526720827988AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10F7FB59B4D56F21FF23FD50 /* Project object */;
+}
