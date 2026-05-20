@@ -4,9 +4,6 @@ struct ContentView: View {
     @StateObject private var audioPlayer = AudioCuePlayer()
     @StateObject private var engine: TempoEngine
 
-    // ElevenLabs API key — update via Settings if needed
-    private let elevenLabsKey = "sk_63561bf1a65c71b60aadc56c28ec33fa5d814fb50092166d"
-
     init() {
         let player = AudioCuePlayer()
         _audioPlayer = StateObject(wrappedValue: player)
@@ -15,17 +12,20 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 28) {
-                headerView
-                swingModePicker
-                gearPicker
-                timingDisplay
-                beatIndicator
-                Spacer()
-                actionArea
-                backgroundNote
+            ScrollView {
+                VStack(spacing: 24) {
+                    headerView
+                    swingModePicker
+                    gearPicker
+                    soundStylePicker
+                    timingDisplay
+                    beatIndicator
+                    actionArea
+                    backgroundNote
+                }
+                .padding(.top, 8)
+                .padding(.bottom, 32)
             }
-            .padding(.top, 8)
             .navigationTitle("Golf Tempo")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -38,12 +38,11 @@ struct ContentView: View {
     private var headerView: some View {
         VStack(spacing: 2) {
             Text("⛳️ Golf Tempo Trainer")
-                .font(.system(size: 26, weight: .bold))
-            Text("3:1 Ratio · Based on Tour Tempo research")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.system(size: 24, weight: .bold))
+            Text("3:1 Ratio · Tour Tempo method")
+                .font(.caption).foregroundColor(.secondary)
         }
-        .padding(.top, 12)
+        .padding(.top, 8)
     }
 
     private var swingModePicker: some View {
@@ -60,7 +59,7 @@ struct ContentView: View {
     private var gearPicker: some View {
         VStack(alignment: .leading, spacing: 6) {
             sectionLabel("TEMPO GEAR")
-            HStack(spacing: 10) {
+            HStack(spacing: 8) {
                 ForEach(TempoGear.allCases) { gear in
                     GearButton(gear: gear, isSelected: engine.gear == gear) {
                         engine.gear = gear
@@ -71,21 +70,25 @@ struct ContentView: View {
         .padding(.horizontal)
     }
 
+    private var soundStylePicker: some View {
+        SoundStylePicker(audioPlayer: audioPlayer)
+    }
+
     private var timingDisplay: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 0) {
             timingStat(
                 value: String(format: "%.2fs", engine.gear.backswingDuration(for: engine.swingMode)),
                 label: "Back"
             )
-            Divider().frame(height: 36)
+            Divider().frame(height: 40)
             timingStat(value: "3 : 1", label: "Ratio")
-            Divider().frame(height: 36)
+            Divider().frame(height: 40)
             timingStat(
                 value: String(format: "%.2fs", engine.gear.downswingDuration(for: engine.swingMode)),
                 label: "Hit"
             )
         }
-        .padding()
+        .padding(.vertical, 12)
         .background(Color(.secondarySystemBackground))
         .cornerRadius(14)
         .padding(.horizontal)
@@ -97,48 +100,33 @@ struct ContentView: View {
     }
 
     private var actionArea: some View {
-        Group {
-            if audioPlayer.isLoading {
-                ProgressView("Generating audio cues…")
-                    .padding()
-            } else if !audioPlayer.isReady {
-                VStack(spacing: 8) {
-                    Button("Prepare Audio Cues") {
-                        Task { await audioPlayer.generateFromElevenLabs(apiKey: elevenLabsKey) }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    Text("Generates voice cues via ElevenLabs (one-time)")
-                        .font(.caption).foregroundColor(.secondary)
-                }
-            } else {
-                Button(engine.isPlaying ? "Stop" : "Start Training") {
-                    engine.isPlaying ? engine.stop() : engine.start()
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .tint(engine.isPlaying ? .red : .green)
-                .font(.title3.bold())
-            }
-
+        VStack(spacing: 8) {
             if let err = audioPlayer.errorMessage {
                 Text(err).font(.caption).foregroundColor(.red)
                     .multilineTextAlignment(.center).padding(.horizontal)
             }
+
+            Button(engine.isPlaying ? "Stop" : "Start Training") {
+                engine.isPlaying ? engine.stop() : engine.start()
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .tint(engine.isPlaying ? .red : .green)
+            .font(.title3.bold())
+            .disabled(!audioPlayer.isReady)
         }
     }
 
     private var backgroundNote: some View {
         Label("Audio continues with screen off", systemImage: "lock.iphone")
-            .font(.caption2)
-            .foregroundColor(.secondary)
-            .padding(.bottom, 24)
+            .font(.caption2).foregroundColor(.secondary)
     }
 
     // MARK: Helpers
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text).font(.caption).fontWeight(.semibold).foregroundColor(.secondary)
+            .padding(.horizontal)
     }
 
     private func timingStat(value: String, label: String) -> some View {

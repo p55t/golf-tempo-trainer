@@ -8,38 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		1F3721AA4DF2B2FEC1DFA76A /* TempoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920350F52C3A47598B9112E0 /* TempoConfig.swift */; };
+		49B37C06F993F4B839511044 /* woodblock_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34F52D4676F560F9263C58A9 /* woodblock_hit.mp3 */; };
+		4B02779916F06F533ED1CD9E /* bell_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BEF2EFFF41A7EC79621101E9 /* bell_hit.mp3 */; };
+		4C7057EA210E25849E200D84 /* metronome_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A95C6491F11AEAEF0A64C74 /* metronome_hit.mp3 */; };
+		663C216A64A6A9D2F32BDFED /* SoundStylePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C78CE4CB845A311D17B5F3 /* SoundStylePicker.swift */; };
 		73DC8D9F87DFE0EE0D70B7DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C627ADBD548BE775273B7 /* ContentView.swift */; };
 		7867F5E7E2FA7ECDB7B596B9 /* TempoEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C6173965FE784286805FB /* TempoEngine.swift */; };
+		81DB323528D755D67144D06C /* bell_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3217C5E450219070EF4042F2 /* bell_back.mp3 */; };
 		82BBEAD91CC2CC9537DD452D /* GearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2F05621D075514446AA6CD /* GearButton.swift */; };
 		93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */; };
 		9EB8C8CC36B3975890825543 /* ElevenLabsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */; };
-		BE8F18693BAEC9227EB10B0E /* hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01C3577C6BA0902C113AC04B /* hit.mp3 */; };
+		9F7A0B3008982108D2FA358A /* beep_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B207E6B71DEB221EAACBB /* beep_hit.mp3 */; };
+		B102402E8A22CD2B0ABDFBB1 /* beep_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B209B9F80194ABB8C9765CE /* beep_back.mp3 */; };
 		DC0FF5F54E7BD1B16F7FE534 /* BeatIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */; };
 		E6F738779A5CAF84C38238D4 /* AudioCuePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */; };
-		F14A44DC00AEF2955E1E338F /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA6461435B8B19BA351D1FEC /* back.mp3 */; };
+		EAAB4050097F1F71932CB9CB /* metronome_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D3CE119D3ACF968DC03072D /* metronome_back.mp3 */; };
+		F4C0D9F0116D665E9C162934 /* woodblock_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 265374B04EB8B1CFB8743C57 /* woodblock_back.mp3 */; };
+		FA6B78EC92413DF610ADB49D /* SoundStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57370E05402A58D9084F5DFE /* SoundStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01C3577C6BA0902C113AC04B /* hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hit.mp3; sourceTree = "<group>"; };
+		265374B04EB8B1CFB8743C57 /* woodblock_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woodblock_back.mp3; sourceTree = "<group>"; };
+		3217C5E450219070EF4042F2 /* bell_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell_back.mp3; sourceTree = "<group>"; };
+		34F52D4676F560F9263C58A9 /* woodblock_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woodblock_hit.mp3; sourceTree = "<group>"; };
 		39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatIndicatorView.swift; sourceTree = "<group>"; };
 		43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCuePlayer.swift; sourceTree = "<group>"; };
 		44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsService.swift; sourceTree = "<group>"; };
+		57370E05402A58D9084F5DFE /* SoundStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundStyle.swift; sourceTree = "<group>"; };
 		5A0C6173965FE784286805FB /* TempoEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoEngine.swift; sourceTree = "<group>"; };
+		5A95C6491F11AEAEF0A64C74 /* metronome_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = metronome_hit.mp3; sourceTree = "<group>"; };
+		5D2B207E6B71DEB221EAACBB /* beep_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep_hit.mp3; sourceTree = "<group>"; };
+		7D3CE119D3ACF968DC03072D /* metronome_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = metronome_back.mp3; sourceTree = "<group>"; };
 		8A4C627ADBD548BE775273B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8B209B9F80194ABB8C9765CE /* beep_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep_back.mp3; sourceTree = "<group>"; };
 		920350F52C3A47598B9112E0 /* TempoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoConfig.swift; sourceTree = "<group>"; };
 		B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GolfTempoTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA6461435B8B19BA351D1FEC /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
 		BB2F05621D075514446AA6CD /* GearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearButton.swift; sourceTree = "<group>"; };
+		BEF2EFFF41A7EC79621101E9 /* bell_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell_hit.mp3; sourceTree = "<group>"; };
 		C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfTempoTrainerApp.swift; sourceTree = "<group>"; };
 		DDA123FF120A07F6E0A84E68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F6C78CE4CB845A311D17B5F3 /* SoundStylePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundStylePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		007E2498FCD690A7075F0633 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				BA6461435B8B19BA351D1FEC /* back.mp3 */,
-				01C3577C6BA0902C113AC04B /* hit.mp3 */,
+				8B209B9F80194ABB8C9765CE /* beep_back.mp3 */,
+				5D2B207E6B71DEB221EAACBB /* beep_hit.mp3 */,
+				3217C5E450219070EF4042F2 /* bell_back.mp3 */,
+				BEF2EFFF41A7EC79621101E9 /* bell_hit.mp3 */,
+				7D3CE119D3ACF968DC03072D /* metronome_back.mp3 */,
+				5A95C6491F11AEAEF0A64C74 /* metronome_hit.mp3 */,
+				265374B04EB8B1CFB8743C57 /* woodblock_back.mp3 */,
+				34F52D4676F560F9263C58A9 /* woodblock_hit.mp3 */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -58,6 +80,7 @@
 				39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */,
 				8A4C627ADBD548BE775273B7 /* ContentView.swift */,
 				BB2F05621D075514446AA6CD /* GearButton.swift */,
+				F6C78CE4CB845A311D17B5F3 /* SoundStylePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -98,6 +121,7 @@
 		BFF45ACEDF2799E20EBD06B0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57370E05402A58D9084F5DFE /* SoundStyle.swift */,
 				920350F52C3A47598B9112E0 /* TempoConfig.swift */,
 			);
 			path = Models;
@@ -173,8 +197,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14A44DC00AEF2955E1E338F /* back.mp3 in Resources */,
-				BE8F18693BAEC9227EB10B0E /* hit.mp3 in Resources */,
+				B102402E8A22CD2B0ABDFBB1 /* beep_back.mp3 in Resources */,
+				9F7A0B3008982108D2FA358A /* beep_hit.mp3 in Resources */,
+				81DB323528D755D67144D06C /* bell_back.mp3 in Resources */,
+				4B02779916F06F533ED1CD9E /* bell_hit.mp3 in Resources */,
+				EAAB4050097F1F71932CB9CB /* metronome_back.mp3 in Resources */,
+				4C7057EA210E25849E200D84 /* metronome_hit.mp3 in Resources */,
+				F4C0D9F0116D665E9C162934 /* woodblock_back.mp3 in Resources */,
+				49B37C06F993F4B839511044 /* woodblock_hit.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +221,8 @@
 				9EB8C8CC36B3975890825543 /* ElevenLabsService.swift in Sources */,
 				82BBEAD91CC2CC9537DD452D /* GearButton.swift in Sources */,
 				93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */,
+				FA6B78EC92413DF610ADB49D /* SoundStyle.swift in Sources */,
+				663C216A64A6A9D2F32BDFED /* SoundStylePicker.swift in Sources */,
 				1F3721AA4DF2B2FEC1DFA76A /* TempoConfig.swift in Sources */,
 				7867F5E7E2FA7ECDB7B596B9 /* TempoEngine.swift in Sources */,
 			);

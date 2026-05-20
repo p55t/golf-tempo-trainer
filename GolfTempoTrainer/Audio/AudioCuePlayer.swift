@@ -2,49 +2,24 @@ import AVFoundation
 import Foundation
 
 final class AudioCuePlayer: ObservableObject {
-    @Published var isReady  = false
-    @Published var isLoading = false
+    @Published var isReady      = false
+    @Published var isLoading    = false
     @Published var errorMessage: String?
+    @Published var soundStyle: SoundStyle = SoundStyle.saved {
+        didSet {
+            SoundStyle.saved = soundStyle
+            loadStyle(soundStyle)
+        }
+    }
 
     private var backPlayer: AVAudioPlayer?
     private var hitPlayer:  AVAudioPlayer?
 
     init() {
-        // Try bundled assets first, fall back to cache
-        if let backURL = Bundle.main.url(forResource: "back", withExtension: "mp3"),
-           let hitURL  = Bundle.main.url(forResource: "hit",  withExtension: "mp3") {
-            loadPlayers(backURL: backURL, hitURL: hitURL)
-        } else {
-            loadFromCache()
-        }
+        loadStyle(soundStyle)
     }
 
     // MARK: Public
-
-    func generateFromElevenLabs(apiKey: String) async {
-        await MainActor.run { isLoading = true; errorMessage = nil }
-        do {
-            async let backData = ElevenLabsService.generateSpeech(text: "back", apiKey: apiKey)
-            async let hitData  = ElevenLabsService.generateSpeech(text: "hit",  apiKey: apiKey)
-
-            let (back, hit) = try await (backData, hitData)
-
-            let backURL = cacheURL(for: "back")
-            let hitURL  = cacheURL(for: "hit")
-            try back.write(to: backURL)
-            try hit.write(to: hitURL)
-
-            await MainActor.run {
-                self.loadPlayers(backURL: backURL, hitURL: hitURL)
-                self.isLoading = false
-            }
-        } catch {
-            await MainActor.run {
-                self.errorMessage = error.localizedDescription
-                self.isLoading = false
-            }
-        }
-    }
 
     func playBack() {
         backPlayer?.currentTime = 0
@@ -56,17 +31,27 @@ final class AudioCuePlayer: ObservableObject {
         hitPlayer?.play()
     }
 
-    // MARK: Private
-
-    private func loadFromCache() {
-        let backURL = cacheURL(for: "back")
-        let hitURL  = cacheURL(for: "hit")
-        guard FileManager.default.fileExists(atPath: backURL.path),
-              FileManager.default.fileExists(atPath: hitURL.path) else { return }
-        loadPlayers(backURL: backURL, hitURL: hitURL)
+    func previewStyle(_ style: SoundStyle) {
+        guard let backURL = bundleURL(for: style.backFilename),
+              let player = try? AVAudioPlayer(contentsOf: backURL) else { return }
+        player.prepareToPlay()
+        player.play()
+        // Hold reference temporarily
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { _ = player }
     }
 
-    private func loadPlayers(backURL: URL, hitURL: URL) {
+    // MARK: Private
+
+    private func loadStyle(_ style: SoundStyle) {
+        isReady = false
+        errorMessage = nil
+
+        guard let backURL = bundleURL(for: style.backFilename),
+              let hitURL  = bundleURL(for: style.hitFilename) else {
+            errorMessage = "Audio files for \(style.label) not found in bundle."
+            return
+        }
+
         do {
             backPlayer = try AVAudioPlayer(contentsOf: backURL)
             hitPlayer  = try AVAudioPlayer(contentsOf: hitURL)
@@ -74,12 +59,11 @@ final class AudioCuePlayer: ObservableObject {
             hitPlayer?.prepareToPlay()
             isReady = true
         } catch {
-            errorMessage = "Audio load failed: \(error.localizedDescription)"
+            errorMessage = "Failed to load \(style.label): \(error.localizedDescription)"
         }
     }
 
-    private func cacheURL(for name: String) -> URL {
-        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("golf_cue_\(name).mp3")
+    private func bundleURL(for name: String) -> URL? {
+        Bundle.main.url(forResource: name, withExtension: "mp3")
     }
 }
