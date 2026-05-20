@@ -21,6 +21,12 @@ targets:
       - GolfTempoTrainer/Resources
     info:
       path: GolfTempoTrainer/Info.plist
+      properties:
+        UIBackgroundModes:
+          - audio
+        CFBundleDisplayName: Golf Tempo
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
     settings:
       base:
         INFOPLIST_FILE: GolfTempoTrainer/Info.plist
