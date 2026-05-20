@@ -1,0 +1,26 @@
+name: GolfTempoTrainer
+options:
+  bundleIdPrefix: com.p55t
+  deploymentTarget:
+    iOS: "16.0"
+
+settings:
+  base:
+    SWIFT_VERSION: 5.9
+    PRODUCT_BUNDLE_IDENTIFIER: com.p55t.GolfTempoTrainer
+    MARKETING_VERSION: 1.0.0
+    CURRENT_PROJECT_VERSION: 1
+
+targets:
+  GolfTempoTrainer:
+    type: application
+    platform: iOS
+    sources:
+      - GolfTempoTrainer
+    resources:
+      - GolfTempoTrainer/Resources
+    info:
+      path: GolfTempoTrainer/Info.plist
+    settings:
+      base:
+        INFOPLIST_FILE: GolfTempoTrainer/Info.plist
