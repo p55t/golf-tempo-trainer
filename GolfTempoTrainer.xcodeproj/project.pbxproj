@@ -19,6 +19,7 @@
 		93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */; };
 		9EB8C8CC36B3975890825543 /* ElevenLabsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F4CABF76D2B8E54F2455B3 /* ElevenLabsService.swift */; };
 		9F7A0B3008982108D2FA358A /* beep_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B207E6B71DEB221EAACBB /* beep_hit.mp3 */; };
+		AA11BB22CC33DD44EE550001 /* PresetSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE550002 /* PresetSheetView.swift */; };
 		B102402E8A22CD2B0ABDFBB1 /* beep_back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B209B9F80194ABB8C9765CE /* beep_back.mp3 */; };
 		DC0FF5F54E7BD1B16F7FE534 /* BeatIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */; };
 		E6F738779A5CAF84C38238D4 /* AudioCuePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EE9FD408E8B4DE84E4FEDA /* AudioCuePlayer.swift */; };
@@ -42,7 +43,8 @@
 		8A4C627ADBD548BE775273B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B209B9F80194ABB8C9765CE /* beep_back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep_back.mp3; sourceTree = "<group>"; };
 		920350F52C3A47598B9112E0 /* TempoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoConfig.swift; sourceTree = "<group>"; };
-		B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GolfTempoTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA11BB22CC33DD44EE550002 /* PresetSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetSheetView.swift; sourceTree = "<group>"; };
+		B3966E54B94DA1419AD45334 /* GolfTempoTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfTempoTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2F05621D075514446AA6CD /* GearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearButton.swift; sourceTree = "<group>"; };
 		BEF2EFFF41A7EC79621101E9 /* bell_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell_hit.mp3; sourceTree = "<group>"; };
 		C8CC187F2633A67B1B935BC6 /* GolfTempoTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfTempoTrainerApp.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				39FB21CF88D4E46CB5C3E81B /* BeatIndicatorView.swift */,
 				8A4C627ADBD548BE775273B7 /* ContentView.swift */,
 				BB2F05621D075514446AA6CD /* GearButton.swift */,
+				AA11BB22CC33DD44EE550002 /* PresetSheetView.swift */,
 				F6C78CE4CB845A311D17B5F3 /* SoundStylePicker.swift */,
 			);
 			path = Views;
@@ -169,9 +172,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
+				LastUpgradeCheck = 2650;
 			};
 			buildConfigurationList = 6D6E16A9AFC44E88B95DEA4F /* Build configuration list for PBXProject "GolfTempoTrainer" */;
 			developmentRegion = en;
@@ -223,6 +224,7 @@
 				93C257AFD95FC33034C489C3 /* GolfTempoTrainerApp.swift in Sources */,
 				FA6B78EC92413DF610ADB49D /* SoundStyle.swift in Sources */,
 				663C216A64A6A9D2F32BDFED /* SoundStylePicker.swift in Sources */,
+				AA11BB22CC33DD44EE550001 /* PresetSheetView.swift in Sources */,
 				1F3721AA4DF2B2FEC1DFA76A /* TempoConfig.swift in Sources */,
 				7867F5E7E2FA7ECDB7B596B9 /* TempoEngine.swift in Sources */,
 			);
@@ -282,8 +284,10 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7LWX39YY5Y;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -299,6 +303,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.p55t.GolfTempoTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
@@ -341,8 +346,10 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7LWX39YY5Y;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -365,6 +372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.p55t.GolfTempoTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;

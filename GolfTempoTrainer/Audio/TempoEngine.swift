@@ -1,80 +1,114 @@
 import Foundation
-import Combine
+import QuartzCore
+
+struct TempoFrame: Equatable {
+    var phase: TempoPhase = .idle
+    var phaseT: Double = 0
+    var cycleT: Double = 0
+    var swingCount: Int = 0
+}
+
+enum TempoPhase: String, Equatable {
+    case idle, back, down, rest
+}
 
 @MainActor
 final class TempoEngine: ObservableObject {
-    @Published var isPlaying = false
-    @Published var currentPhase: SwingPhase = .idle
-    @Published var gear: TempoGear = .gear2
-    @Published var swingMode: SwingMode = .fullSwing
+    @Published private(set) var frame = TempoFrame()
+    @Published private(set) var isRunning = false
 
-    private var backTimer: Timer?
-    private var hitTimer: Timer?
-    private let player: AudioCuePlayer
+    var ratio: Double = 3.0
+    var swingMs: Double = 1000
+    var restMs: Double = 2200
+    var soundOn: Bool = true
+    var volume: Double = 0.55 { didSet { audioPlayer.masterVolume = volume } }
 
-    enum SwingPhase: Equatable {
-        case idle, backswing, downswing
+    private let audioPlayer: AudioCuePlayer
+    private var displayTimer: Timer?
+    private var cycleStart: CFTimeInterval = 0
+    private var lastScheduledCycle = -1
+    private var swingCount = 0
 
-        var label: String {
-            switch self {
-            case .idle:      return "Ready"
-            case .backswing: return "Back"
-            case .downswing: return "Hit"
-            }
-        }
-    }
-
-    init(player: AudioCuePlayer) {
-        self.player = player
+    init(audioPlayer: AudioCuePlayer) {
+        self.audioPlayer = audioPlayer
     }
 
     func start() {
-        guard !isPlaying else { return }
-        isPlaying = true
-        beginBackswing()
+        guard !isRunning else { return }
+        isRunning = true
+        cycleStart = CACurrentMediaTime()
+        lastScheduledCycle = 0
+        swingCount = 0
+        scheduleAudio(offsetFromNow: 0.06)
+        let t = Timer(timeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
+            Task { @MainActor [weak self] in self?.tick() }
+        }
+        RunLoop.main.add(t, forMode: .common)
+        displayTimer = t
     }
 
     func stop() {
-        isPlaying = false
-        currentPhase = .idle
-        cancelTimers()
+        isRunning = false
+        displayTimer?.invalidate()
+        displayTimer = nil
+        audioPlayer.stopBeats()
+        frame = TempoFrame()
     }
 
-    func restart() {
-        stop()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.start()
-        }
+    func applyPreset(_ preset: TempoPreset) {
+        ratio = preset.ratio
+        swingMs = preset.swingMs
     }
 
     // MARK: Private
 
-    private func beginBackswing() {
-        guard isPlaying else { return }
-        currentPhase = .backswing
-        player.playBack()
+    private var backSecs: Double { swingMs * ratio / (ratio + 1) / 1000 }
+    private var downSecs: Double { swingMs / (ratio + 1) / 1000 }
+    private var cycleSecs: Double { (swingMs + restMs) / 1000 }
 
-        let duration = gear.backswingDuration(for: swingMode)
-        backTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { [weak self] _ in
-            Task { @MainActor [weak self] in self?.beginDownswing() }
-        }
+    // Called from MainActor — uses play(atTime:) for hardware-clock accuracy.
+    // No GCD/DispatchWorkItem; the audio framework schedules at exact device times.
+    private func scheduleAudio(offsetFromNow t0: Double) {
+        guard soundOn else { return }
+        audioPlayer.scheduleBeats(
+            takeawayIn: t0,
+            topIn:      t0 + backSecs,
+            impactIn:   t0 + backSecs + downSecs
+        )
     }
 
-    private func beginDownswing() {
-        guard isPlaying else { return }
-        currentPhase = .downswing
-        player.playHit()
+    private func tick() {
+        guard isRunning else { return }
+        let now = CACurrentMediaTime()
+        let cycle = cycleSecs
+        let elapsed = now - cycleStart
+        let t = elapsed.truncatingRemainder(dividingBy: cycle)
+        let back = backSecs, down = downSecs
 
-        let rest = gear.downswingDuration(for: swingMode) + gear.restDuration(for: swingMode)
-        hitTimer = Timer.scheduledTimer(withTimeInterval: rest, repeats: false) { [weak self] _ in
-            Task { @MainActor [weak self] in self?.beginBackswing() }
+        let phase: TempoPhase
+        let phaseT: Double
+        if t < back {
+            phase = .back;  phaseT = t / back
+        } else if t < back + down {
+            phase = .down;  phaseT = (t - back) / down
+        } else {
+            phase = .rest;  phaseT = min(1, (t - back - down) / (restMs / 1000))
         }
-    }
 
-    private func cancelTimers() {
-        backTimer?.invalidate()
-        hitTimer?.invalidate()
-        backTimer = nil
-        hitTimer = nil
+        let cycleIdx = Int(elapsed / cycle)
+        if cycleIdx != lastScheduledCycle {
+            if cycleIdx > 0 { swingCount += 1 }
+            lastScheduledCycle = cycleIdx
+            let boundary = cycleStart + Double(cycleIdx) * cycle
+            let offset = max(0.02, boundary - now)
+            scheduleAudio(offsetFromNow: offset)
+        }
+
+        frame = TempoFrame(
+            phase: phase,
+            phaseT: max(0, min(1, phaseT)),
+            cycleT: t / cycle,
+            swingCount: swingCount
+        )
     }
 }

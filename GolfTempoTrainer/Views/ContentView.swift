@@ -1,139 +1,84 @@
 import SwiftUI
 
+enum AppRoute { case home, live }
+
+enum SheetState: Identifiable {
+    case add(seed: TempoPreset?)
+    case edit(id: String)
+    var id: String {
+        switch self {
+        case .add:          return "add"
+        case .edit(let i):  return "edit-\(i)"
+        }
+    }
+}
+
 struct ContentView: View {
-    @StateObject private var audioPlayer = AudioCuePlayer()
+    @StateObject private var store = AppStore()
+    @StateObject private var audioPlayer: AudioCuePlayer
     @StateObject private var engine: TempoEngine
+
+    @State private var route: AppRoute = .home
+    @State private var sheet: SheetState? = nil
 
     init() {
         let player = AudioCuePlayer()
         _audioPlayer = StateObject(wrappedValue: player)
-        _engine      = StateObject(wrappedValue: TempoEngine(player: player))
+        _engine      = StateObject(wrappedValue: TempoEngine(audioPlayer: player))
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    headerView
-                    swingModePicker
-                    gearPicker
-                    soundStylePicker
-                    timingDisplay
-                    beatIndicator
-                    actionArea
-                    backgroundNote
-                }
-                .padding(.top, 8)
-                .padding(.bottom, 32)
-            }
-            .navigationTitle("Golf Tempo")
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .onChange(of: engine.swingMode) { _ in if engine.isPlaying { engine.restart() } }
-        .onChange(of: engine.gear)      { _ in if engine.isPlaying { engine.restart() } }
-    }
-
-    // MARK: Sub-views
-
-    private var headerView: some View {
-        VStack(spacing: 2) {
-            Text("⛳️ Golf Tempo Trainer")
-                .font(.system(size: 24, weight: .bold))
-            Text("3:1 Ratio · Tour Tempo method")
-                .font(.caption).foregroundColor(.secondary)
-        }
-        .padding(.top, 8)
-    }
-
-    private var swingModePicker: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            sectionLabel("SWING TYPE")
-            Picker("Swing Mode", selection: $engine.swingMode) {
-                ForEach(SwingMode.allCases) { Text($0.description).tag($0) }
-            }
-            .pickerStyle(.segmented)
-        }
-        .padding(.horizontal)
-    }
-
-    private var gearPicker: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            sectionLabel("TEMPO GEAR")
-            HStack(spacing: 8) {
-                ForEach(TempoGear.allCases) { gear in
-                    GearButton(gear: gear, isSelected: engine.gear == gear) {
-                        engine.gear = gear
+        let colors = store.isDark ? TC.night : TC.paper
+        ZStack {
+            if route == .home {
+                HomeView(
+                    store: store,
+                    onStart:      startSession,
+                    onEditPreset: { id in sheet = .edit(id: id) },
+                    onAddPreset:  { sheet = .add(seed: nil) }
+                )
+            } else {
+                LiveSessionView(
+                    store: store,
+                    engine: engine,
+                    onBack: endSession,
+                    onSaveAsNew: {
+                        sheet = .add(seed: store.activePreset)
                     }
-                }
-            }
-        }
-        .padding(.horizontal)
-    }
-
-    private var soundStylePicker: some View {
-        SoundStylePicker(audioPlayer: audioPlayer)
-    }
-
-    private var timingDisplay: some View {
-        HStack(spacing: 0) {
-            timingStat(
-                value: String(format: "%.2fs", engine.gear.backswingDuration(for: engine.swingMode)),
-                label: "Back"
-            )
-            Divider().frame(height: 40)
-            timingStat(value: "3 : 1", label: "Ratio")
-            Divider().frame(height: 40)
-            timingStat(
-                value: String(format: "%.2fs", engine.gear.downswingDuration(for: engine.swingMode)),
-                label: "Hit"
-            )
-        }
-        .padding(.vertical, 12)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(14)
-        .padding(.horizontal)
-    }
-
-    private var beatIndicator: some View {
-        BeatIndicatorView(phase: engine.currentPhase)
-            .frame(height: 140)
-    }
-
-    private var actionArea: some View {
-        VStack(spacing: 8) {
-            if let err = audioPlayer.errorMessage {
-                Text(err).font(.caption).foregroundColor(.red)
-                    .multilineTextAlignment(.center).padding(.horizontal)
+                )
             }
 
-            Button(engine.isPlaying ? "Stop" : "Start Training") {
-                engine.isPlaying ? engine.stop() : engine.start()
+            if let s = sheet {
+                PresetSheetView(
+                    state: s,
+                    store: store,
+                    onClose: { sheet = nil }
+                )
+                .zIndex(10)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .tint(engine.isPlaying ? .red : .green)
-            .font(.title3.bold())
-            .disabled(!audioPlayer.isReady)
         }
-    }
-
-    private var backgroundNote: some View {
-        Label("Audio continues with screen off", systemImage: "lock.iphone")
-            .font(.caption2).foregroundColor(.secondary)
-    }
-
-    // MARK: Helpers
-
-    private func sectionLabel(_ text: String) -> some View {
-        Text(text).font(.caption).fontWeight(.semibold).foregroundColor(.secondary)
-            .padding(.horizontal)
-    }
-
-    private func timingStat(value: String, label: String) -> some View {
-        VStack(spacing: 2) {
-            Text(value).font(.title3.bold())
-            Text(label).font(.caption).foregroundColor(.secondary)
+        // Background as modifier so the ZStack layout respects safe areas
+        .background(colors.bg.ignoresSafeArea())
+        .animation(.easeInOut(duration: 0.28), value: sheet?.id)
+        .environment(\.tc, colors)
+        .onAppear {
+            engine.applyPreset(store.activePreset)
+            engine.soundOn = store.soundOn
+            engine.volume  = store.volume
         }
-        .frame(maxWidth: .infinity)
+        .onChange(of: store.activePreset) { engine.applyPreset($0) }
+        .onChange(of: store.soundOn)      { engine.soundOn = $0 }
+        .onChange(of: store.volume)       { engine.volume  = $0 }
+    }
+
+    private func startSession() {
+        withAnimation(.easeInOut(duration: 0.35)) { route = .live }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { engine.start() }
+    }
+
+    private func endSession() {
+        engine.stop()
+        withAnimation(.easeInOut(duration: 0.35)) { route = .home }
     }
 }
