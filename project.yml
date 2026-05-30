@@ -27,6 +27,7 @@ targets:
         CFBundleDisplayName: Golf Tempo
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
+        UILaunchScreen: {}
     settings:
       base:
         INFOPLIST_FILE: GolfTempoTrainer/Info.plist
