@@ -16,17 +16,28 @@ struct HomeView: View {
 
     var body: some View {
         GeometryReader { geo in
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 14) {
-                    header
-                    heroCard
-                    startButton
-                    presetsSection
+            VStack(spacing: 0) {
+                // Header pinned at top — bleeds into Dynamic Island / status bar
+                header
+                    .padding(.horizontal, 22)
+                    .padding(.top, 14)
+                    .padding(.bottom, 14)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(colors.bg.ignoresSafeArea(edges: .top))
+
+                Divider().background(colors.lineSoft)
+
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 14) {
+                        heroCard
+                        startButton
+                        presetsSection
+                    }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 22)
+                    .padding(.bottom, 24)
+                    .frame(minWidth: geo.size.width, alignment: .top)
                 }
-                .padding(.top, 16)
-                .padding(.horizontal, 22)
-                .padding(.bottom, 24)
-                .frame(minWidth: geo.size.width, minHeight: geo.size.height, alignment: .top)
             }
         }
     }
@@ -69,18 +80,18 @@ struct HomeView: View {
 
                 HStack(alignment: .bottom, spacing: 6) {
                     Text(String(format: "%.1f", preset.ratio))
-                        .font(.system(size: 60, weight: .medium).monospacedDigit())
+                        .font(.system(size: 72, weight: .medium).monospacedDigit())
                         .foregroundColor(colors.ink)
                         .lineLimit(1)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(":1")
-                            .font(.system(size: 15, weight: .medium).monospacedDigit())
+                            .font(.system(size: 18, weight: .medium).monospacedDigit())
                             .foregroundColor(colors.inkSoft)
                         Text("RATIO")
                             .font(.system(size: 8.5, weight: .medium)).tracking(1.4)
                             .foregroundColor(colors.inkFaint)
                     }
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 10)
                 }
 
                 Divider().background(colors.lineSoft)

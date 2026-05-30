@@ -1,4 +1,4 @@
-// Renamed: contains LiveSessionView
+// Contains LiveSessionView
 import SwiftUI
 
 // MARK: - Beat dots
@@ -75,19 +75,24 @@ struct LiveSessionView: View {
     @Environment(\.tc) var colors
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Fixed top bar — always visible
-            topBar
-                .padding(.horizontal, 22)
-                .padding(.top, 10)
-                .padding(.bottom, 8)
+        GeometryReader { geo in
+            let vizSize = min(geo.size.width - 44, 300)
 
-            Divider().background(colors.lineSoft)
+            VStack(spacing: 0) {
 
-            // Scrollable body
-            ScrollView(showsIndicators: false) {
+                // ── Top bar ── background bleeds into Dynamic Island / status bar area
+                topBar
+                    .padding(.horizontal, 22)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    .background(colors.bg.ignoresSafeArea(edges: .top))
+
+                Divider().background(colors.lineSoft)
+
+                // ── Main content ── fills remaining space, no scroll
                 VStack(spacing: 0) {
-                    // Preset name
+
+                    // Preset label
                     VStack(spacing: 2) {
                         Text("PLAYING")
                             .font(.system(size: 9.5, weight: .medium)).tracking(1.8)
@@ -96,40 +101,43 @@ struct LiveSessionView: View {
                             .font(.custom("Georgia", size: 20))
                             .foregroundColor(colors.ink)
                     }
-                    .padding(.top, 16)
-                    .padding(.bottom, 4)
+                    .padding(.top, 14)
+                    .padding(.bottom, 6)
 
-                    // Pendulum viz — fixed 200pt
+                    // Pendulum — scales to screen width
                     PendulumView(
                         style: store.vizStyle,
                         frame: engine.frame,
                         ratio: store.activePreset.ratio,
                         swingMs: store.activePreset.swingMs
                     )
-                    .frame(width: 200, height: 200)
+                    .frame(width: vizSize, height: vizSize)
 
+                    // Beat indicators
                     BeatDotsView(frame: engine.frame)
-                        .padding(.top, 8)
+                        .padding(.top, 10)
 
                     // Ratio readout
                     HStack(alignment: .bottom, spacing: 3) {
                         Text(String(format: "%.1f", store.activePreset.ratio))
-                            .font(.system(size: 52, weight: .medium).monospacedDigit())
+                            .font(.system(size: 48, weight: .medium).monospacedDigit())
                             .foregroundColor(colors.ink)
                         Text(":1")
-                            .font(.system(size: 20, weight: .medium).monospacedDigit())
+                            .font(.system(size: 18, weight: .medium).monospacedDigit())
                             .foregroundColor(colors.inkFaint)
                             .padding(.bottom, 4)
                     }
-                    .padding(.top, 10)
+                    .padding(.top, 8)
 
                     Text("\(Int(store.activePreset.backMs.rounded()))ms · \(Int(store.activePreset.downMs.rounded()))ms · \(String(format: "%.2f", store.activePreset.swingMs / 1000))s")
                         .font(.system(size: 11, weight: .medium).monospacedDigit()).tracking(0.6)
                         .foregroundColor(colors.inkFaint)
                         .padding(.top, 2)
 
+                    Spacer(minLength: 8)
+
                     // Sliders
-                    VStack(spacing: 14) {
+                    VStack(spacing: 12) {
                         tempoSlider(
                             label: "RATIO",
                             value: Binding(
@@ -149,10 +157,9 @@ struct LiveSessionView: View {
                             display: String(format: "%.2fs", store.activePreset.swingMs / 1000)
                         )
                     }
-                    .padding(.top, 16)
                     .padding(.horizontal, 22)
 
-                    // Actions row: save + viz picker
+                    // Save + viz picker
                     HStack(spacing: 10) {
                         Button(action: onSaveAsNew) {
                             Text("+ Save as new")
@@ -167,14 +174,15 @@ struct LiveSessionView: View {
                         VizPicker(selection: $store.vizStyle)
                             .frame(maxWidth: .infinity)
                     }
-                    .padding(.top, 14)
+                    .padding(.top, 10)
                     .padding(.horizontal, 22)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 10)
                 }
-            }
+                .frame(maxHeight: .infinity)
 
-            // Fixed transport — always visible, never overlaps content
-            transportBar
+                // ── Transport bar ── background bleeds into home indicator area
+                transportBar
+            }
         }
     }
 
@@ -262,6 +270,7 @@ struct LiveSessionView: View {
             .animation(.easeInOut(duration: 0.15), value: engine.isRunning)
             .padding(.vertical, 14)
         }
-        .background(colors.bg)
+        // Bleed theme color into home indicator area — no bare black strip
+        .background(colors.bg.ignoresSafeArea(edges: .bottom))
     }
 }
